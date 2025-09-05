@@ -3,6 +3,8 @@ import validator from "validator"
 import bcrypt from "bcrypt"
 import { genToken } from "../config/token.js"
 
+
+// Register
 export const registration = async (req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -50,19 +52,32 @@ export const registration = async (req, res) => {
 };
 
 
+// login
 export const login = async (req, res) => {
     try {
         let { email, password } = req.body;
+
+        // Input validation
+        if (!email || !password) {
+            return res.status(400).json({ message: "Email and password are required" })
+        }
+
+        // taking actual data form  databse by help of enter email
         let user = await User.findOne({ email })
         if (!user) {
-            return res.status(404).json({ message: "Invalid candiatation 0" })
+            return res.status(404).json({ message: "Invalid credentials" })
         }
-        let isMatch =  await bcrypt.compare(password, User.password);
+
+
+        // compare passwaord 
+        let isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(404).json({ message: "invalid candantion" })
+            return res.status(400).json({ message: "Invalid credentials" })
         }
+
+
         // Generate JWT token
-        const token = await genToken(user._id);
+        let token = await genToken(user._id);
 
         // Send the JWT token in cookies
         res.cookie("token", token, {
@@ -71,8 +86,26 @@ export const login = async (req, res) => {
             sameSite: "strict",
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
         });
-        return res.status.json({ message: "Login sucessfully " })
+
+
+        
+        return res.status(201).json({ message: "Login sucessfully " })
     } catch (error) {
+        console.log("Login error:", error);
+        return res.status(500).json({ message: `login error ${error}` });
 
     }
 }
+
+
+//Logout 
+export const logout=async (req,res)=>{
+    try {
+        res.clearCookie("token");
+         return res.status(200).json({ message: "Logout sucessfully " })
+    } catch (error) {
+        console.log("logout error:", error);
+         return res.status(500).json({ message: `login error ${error}` });
+    }
+}
+

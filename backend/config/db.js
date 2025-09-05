@@ -10,6 +10,10 @@ const connectDb=async ()=>{
         console.error("Database connection error:", error.message)
         throw error
     }
+
+
+
+    
 }
 
 export default connectDb
