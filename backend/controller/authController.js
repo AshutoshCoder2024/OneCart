@@ -4,11 +4,11 @@ import bcrypt from "bcrypt"
 import { genToken } from "../config/token.js"
 
 
-// Register
+// Register signup
 export const registration = async (req, res) => {
     try {
         const { name, email, password } = req.body;
-        
+
         // Validate if all required fields are present
         // if (!name || !email || !password) {
         //     return res.status(400).json({ message: "All fields are required" });
@@ -93,7 +93,7 @@ export const login = async (req, res) => {
         });
 
 
-        
+
         return res.status(201).json({ message: "Login sucessfully " })
     } catch (error) {
         console.log("Login error:", error);
@@ -104,13 +104,44 @@ export const login = async (req, res) => {
 
 
 //Logout 
-export const logout=async (req,res)=>{
+export const logout = async (req, res) => {
     try {
         res.clearCookie("token");
-         return res.status(200).json({ message: "Logout sucessfully " })
+        return res.status(200).json({ message: "Logout sucessfully " })
     } catch (error) {
         console.log("logout error:", error);
-         return res.status(500).json({ message: `login error ${error}` });
+        return res.status(500).json({ message: `login error ${error}` });
     }
+}
+
+//google signup
+export const googlelogin = async (req, res) => {
+    try {
+
+        let { name, email } = req.body;
+        let user = await User.findOne({ email });
+        if (!user) {
+            user = await User.create({ name, email });
+        }
+        // Generate JWT token
+        let token = await genToken(user._id);
+
+        // Send the JWT token in cookies
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: false, // change to true in production with HTTPS
+            sameSite: "strict",
+            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+        });
+        return res.status(200).json(user);
+
+
+    } catch (error) {
+        console.log("google signup error:", error);
+        return res.status(500).json({
+            message: `google signup error: ${error}`
+        });
+    }
+
 }
 
