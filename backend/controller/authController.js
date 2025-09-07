@@ -8,6 +8,11 @@ import { genToken } from "../config/token.js"
 export const registration = async (req, res) => {
     try {
         const { name, email, password } = req.body;
+        
+        // Validate if all required fields are present
+        // if (!name || !email || !password) {
+        //     return res.status(400).json({ message: "All fields are required" });
+        // }
 
         // Check if the email already exists
         const existUser = await User.findOne({ email });
@@ -58,9 +63,9 @@ export const login = async (req, res) => {
         let { email, password } = req.body;
 
         // Input validation
-        if (!email || !password) {
-            return res.status(400).json({ message: "Email and password are required" })
-        }
+        // if (!email || !password) {
+        //     return res.status(400).json({ message: "Email and password are required" })
+        // }
 
         // taking actual data form  databse by help of enter email
         let user = await User.findOne({ email })
