@@ -8,11 +8,13 @@ import { AuthDataContext } from '../Context/AuthContext';
 import axios from "axios"
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../utils/Firebase";
+import { UserDataContext } from '../Context/UserContext';
 
 
 
 function Login() {
     let navigate = useNavigate();
+    let { getCurrentUser } = useContext(UserDataContext)
     const [show, setshow] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -23,10 +25,13 @@ function Login() {
             const result = await axios.post(serverUrl + "/api/auth/login", {
                 email, password
             }, { withCredentials: true });
-            
-            if (result.status === 201) {
-                alert("login sucessfully ")  // Redirect to home page after successful login
-            }
+            console.log(result.data);
+            getCurrentUser();
+            navigate("/");
+
+            // if (result.status === 201) {
+            //     alert("login sucessfully ")  // Redirect to home page after successful login
+            // }
             
         } catch (error) {
             alert(error.response?.data?.message || "Login failed. Please try again.");

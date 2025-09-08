@@ -7,17 +7,12 @@ const authRoutes=express.Router()
 authRoutes.post("/registration", registration) 
 // for above routing the register function present in  "../controller/authController.js" is called
 
-
-
 // login route
 authRoutes.post("/login", login) 
 
 // logout route 
 authRoutes.get("/logout", logout)
 
-
 //google signup route
 authRoutes.post("/googlelogin", googlelogin)
-
-
 export default authRoutes

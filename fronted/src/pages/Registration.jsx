@@ -8,11 +8,13 @@ import { AuthDataContext } from "../Context/AuthContext";
 import axios from "axios";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../utils/Firebase";
+import { UserDataContext } from '../Context/UserContext';
 
 function Registration() {
   const [show, setshow] = useState(false);
 
   const { serverUrl } = useContext(AuthDataContext);
+  const {getCurrentUser} = useContext(UserDataContext)
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("");
@@ -29,6 +31,8 @@ function Registration() {
         { withCredentials: true }
       );
       console.log(result.data);
+      getCurrentUser();
+            navigate("/");
     } catch (error) {
       alert(error.response?.data?.message || error.message);
       console.log(error);
