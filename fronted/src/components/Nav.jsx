@@ -10,6 +10,7 @@ import axios from 'axios'
 import { FaUserCircle } from "react-icons/fa"
 import { UserDataContext } from '../Context/UserContext'
 
+
 function Nav() {
   const { userData, getCurrentUser } = useContext(UserDataContext)
   let { serverUrl } = useContext(AuthDataContext)

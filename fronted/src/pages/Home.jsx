@@ -1,10 +1,36 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
+import Background from '../components/Background'
+import Hero from '../components/Hero'
 
 function Home() {
+    let heroData = [
+        { text1: "30% OFF Limited Offers", text2: "Smart Watches" },
+        { text1: "20% OFF New Arrivals", text2: "Best Headphones" },
+        { text1: "15% OFF On Orders", text2: "Latest Mobiles" },
+        { text1: "10% OFF Special Deals", text2: "Top Laptops" }
+    ]
+
+    let [heroCount, setHeroCount] = useState(0)
+
+    useEffect(() => {
+        let interval = setInterval(() => {
+            setHeroCount((prevCount) => (prevCount + 1) % heroData.length);
+        }, 3000);
+        return () => clearInterval(interval);
+
+    }, [])
+
     return (
-        <div className='w-[100vw] h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] text-[white] flex flex-col items-center justify-start'>
-            <h1 className='text-[32px] font-bold'>Home</h1>
+
+        <div className='overflow-x-hidden relative  '>
+
+            <div className='w-[100vw] lg:h-[100vh] md:h-[50vh] sm:h-[30vh] bg-gradient-to-l from-[#141414] to-[#0c2025] '>
+                <Background heroCount={heroCount} />
+                <Hero heroCount={heroCount} setHeroCount={setHeroCount} heroData={heroData[heroCount]} />
+            </div>
         </div>
     )
 }
-export default Home 
+export default Home
+
