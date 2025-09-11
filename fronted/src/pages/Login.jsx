@@ -52,6 +52,8 @@ function Login() {
             { name, email },
             { withCredentials: true }
           );
+          getCurrentUser();
+            navigate("/");
           console.log(result.data);
         } catch (error) {
             console.error("Google Signup Error:", error.response?.data || error.message);
