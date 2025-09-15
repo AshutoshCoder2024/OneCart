@@ -1,7 +1,7 @@
 import User from "../model/userModel.js"
 import validator from "validator"
 import bcrypt from "bcrypt"
-import { genToken } from "../config/token.js"
+import { genToken, genToken1 } from "../config/token.js"
 
 
 // Register signup
@@ -110,7 +110,7 @@ export const logout = async (req, res) => {
         return res.status(200).json({ message: "Logout sucessfully " })
     } catch (error) {
         console.log("logout error:", error);
-        return res.status(500).json({ message: `login error ${error}` });
+        return res.status(500).json({ message: `error error ${error}` });
     }
 }
 
@@ -145,3 +145,42 @@ export const googlelogin = async (req, res) => {
 
 }
 
+
+// Admin Login
+export const adminLogin = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // Check if email and password are provided
+        if (!email || !password) {
+            return res.status(400).json({ message: "Email and password are required" });
+        }
+
+        // Check if admin credentials match
+        if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+
+
+            const token = await genToken1(email); // Using 'admin' as identifier
+            // Send the JWT token in cookies
+            res.cookie("token", token, {
+                httpOnly: true,
+                secure: false, // change to true in production with HTTPS
+                sameSite: "strict",
+                maxAge: 1 * 24 * 60 * 60 * 1000 // 1 day
+            });
+
+            return res.status(200).json(token);
+        }
+
+        return res.status(401).json({ message: "Invalid admin credentials" });
+
+    } catch (error) {
+        console.error("Admin Login Error:", error);
+        return res.status(500).json({ 
+            message: "Admin login failed", 
+            error: error.message 
+        });
+    }
+}
+
+``

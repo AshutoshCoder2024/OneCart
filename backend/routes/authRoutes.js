@@ -1,5 +1,5 @@
 import express from "express"
-import { registration,login,logout, googlelogin } from "../controller/authController.js"
+import { registration,login,logout, googlelogin,adminLogin } from "../controller/authController.js"
 
 const authRoutes=express.Router()
 
@@ -15,4 +15,9 @@ authRoutes.get("/logout", logout)
 
 //google signup route
 authRoutes.post("/googlelogin", googlelogin)
+
+// //Admin login 
+authRoutes.post("/adminlogin", adminLogin)
+
+
 export default authRoutes

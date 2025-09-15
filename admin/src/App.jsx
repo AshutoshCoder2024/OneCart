@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useContext, useState } from "react";
+
+import "./App.css";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Home from "./pages/Home.jsx";
+import List from "./pages/List.jsx";
+import Orders from "./pages/Orders.jsx";
+import Login from "./pages/Login.jsx";
+import Add from "./pages/Add.jsx";
+import { adminDataContext } from "./context/AdminContext";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const { adminData } = useContext(adminDataContext);
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {!adminData ? (
+        <Login></Login>
+      ) : (
+        <>
+          {
+            <Routes>
+              <Route path="/" element={<Home></Home>}></Route>
+              <Route path="/add" element={<Add></Add>}></Route>
+              <Route path="/lists" element={<List></List>}></Route>
+              <Route path="/orders" element={<Orders></Orders>}></Route>
+              <Route path="/login" element={<Login></Login>}></Route>
+            </Routes>
+          }
+        </>
+      )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;

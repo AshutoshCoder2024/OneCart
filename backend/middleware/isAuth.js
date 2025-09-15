@@ -25,7 +25,8 @@ const isAuth = async (req, res, next) => {
         }
 
         // Set the user object in the request
-        req.user = { userId: decoded.userId };
+        req.user = {
+             userId: decoded.userId };
         console.log("User set in request:", req.user);
         
         next();
