@@ -1,3 +1,5 @@
+// in this file we will write a function that will upload img from public folder(help of multer middleware)  on cloudinary and return the url of that img
+
 import { v2 as cloudinary } from 'cloudinary';
 import fs from 'fs'
 import upload from '../middleware/multer.js';
