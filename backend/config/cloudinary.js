@@ -8,10 +8,9 @@ import upload from '../middleware/multer.js';
 const uploadOnCloudinary=async (filepath)=>{
     cloudinary.config({ 
         cloud_name: process.env.CLOUDINARY_NAME, 
-        api_key: process.env.CLOUDINARY_API_KAY,
-        api_secret: process.env.CLOUDINARY_API_KAY // Click 'View API Keys' above to copy your API secret
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET
     });
-
     try {
         if(!filepath)
             {

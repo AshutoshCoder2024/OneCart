@@ -4,7 +4,7 @@ import connectDb from './config/db.js'
 import cors from 'cors'
 import authRoutes from './routes/authRoutes.js'
 import userRoutes from './routes/userRoutes.js'
-import productRouter from './routes/productroute.js'
+import productRoutes from './routes/productroute.js'
 
 import cookieParser from "cookie-parser";
 dotenv.config()
@@ -26,7 +26,7 @@ app.use(cors({
 
 app.use("/api/auth", authRoutes)//localhost:8000/api/auth/registration
 app.use("/api/user", userRoutes)
-app.use("/api/product", productRouter)
+app.use("/api/product", productRoutes)
 
 app.listen(port,()=>{
     console.log("Hello from Server")
