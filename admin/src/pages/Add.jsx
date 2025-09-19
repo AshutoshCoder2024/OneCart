@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import Nav from "../components/Nav";
-import Sidebar from "../components/Slidebar";
+import Sidebar from "../components/Sidebar";
 import upload from "../assets/upload.png";
 import { AuthDataContext } from "../context/AuthContext";
 import axios from "axios";

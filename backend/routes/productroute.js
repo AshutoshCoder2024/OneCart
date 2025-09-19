@@ -1,7 +1,8 @@
 // in this file we will create routes for product 
 import express from "express";
-import { addProduct } from "../controller/productController.js";
+import { addProduct, listProduct, removeProduct } from "../controller/productController.js";
 import upload from '../middleware/multer.js'; 
+import adminAuth from "../middleware/adminauth.js"
 
 
 let productRoutes=express.Router()
@@ -13,3 +14,6 @@ productRoutes.post("/addproduct",upload.fields([
     {name:"image4",maxCount:1}]) ,addProduct)
 
     export default productRoutes
+
+    productRoutes.get("/list",listProduct)
+    productRoutes.post("/remove/:id",adminAuth,removeProduct)

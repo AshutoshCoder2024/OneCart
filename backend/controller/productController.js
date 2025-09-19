@@ -53,3 +53,52 @@ export const addProduct=async(req,res)=>{
         return res.status(500).json({ message: `Addproduct  Error ${error}` });
     }
 }
+
+
+// list product
+
+export const listProduct =async (req,res)=>{
+    try {
+        const product=await    Product.find({})
+        return res.status(200).json(product)
+    } catch (error) {
+        console.log(("ListProduct Error"))
+        return res.status(500).json({message:`ListProduct error ${error}`}) 
+    }
+}
+
+
+// Remove Product 
+
+// export const removeProduct=async (req,res)=>{
+//     try {
+//         let {id}=req.params;
+//         const product=await  Product.findByIdAndDelete(id)
+//         return res.status(200).json(product)
+//     } catch (error) {
+//         console.log(("RemoveProduct Error"))
+//         return res.status(500).json({message:`ListProduct error ${error}`}) 
+
+//     }
+// }
+
+
+export const removeProduct = async (req, res) => {
+    try {
+      const { id } = req.params; 
+      if (!id) {
+        return res.status(400).json({ message: "Product ID is required" });
+      }
+      const product = await Product.findByIdAndDelete(id);
+      if (!product) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+      return res.status(200).json({
+        message: "Product deleted successfully",
+        product,
+      });
+    } catch (error) {
+      console.log("RemoveProduct Error:", error); // ✅ Fixed: extra parentheses + added colon/error logging
+      return res.status(500).json({ message: `RemoveProduct error: ${error.message}` }); // ✅ Fixed typo: was "ListProduct"
+    }
+  };
