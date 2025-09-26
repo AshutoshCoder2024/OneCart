@@ -59,7 +59,6 @@ function Add() {
       console.log(error);
     }
   };
-
   return (
     <div className="w-[100vw] min-h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] text-[white] overflow-x-hidden relative bottom-[px]">
       <Nav></Nav>
@@ -357,7 +356,6 @@ function Add() {
     </div>
   );
 }
-
 export default Add;
 
 // URL.createObjectURL() creates a temporary URL that points to the file in memory, so React can show the image before uploading.
