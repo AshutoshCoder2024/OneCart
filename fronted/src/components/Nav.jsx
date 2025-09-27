@@ -11,6 +11,7 @@ import { FaUserCircle } from "react-icons/fa"
 import { UserDataContext } from '../Context/UserContext'
 
 
+
 function Nav() {
   const { userData, getCurrentUser } = useContext(UserDataContext)
   let { serverUrl } = useContext(AuthDataContext)
@@ -41,10 +42,10 @@ function Nav() {
       {/* Nav Links */}
       <div className='hidden md:flex w-[50%] lg:w-[40%]'>
         <ul className='flex items-center justify-center gap-[20px] lg:gap-[30px] text-[15px] md:text-[16px] font-medium text-white'>
-          <li className='hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[8px] px-[15px] md:px-[20px] rounded-2xl'>HOME</li>
-          <li className='hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[8px] px-[15px] md:px-[20px] rounded-2xl'>COLLECTION</li>
-          <li className='hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[8px] px-[15px] md:px-[20px] rounded-2xl'>ABOUT</li>
-          <li className='hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[8px] px-[15px] md:px-[20px] rounded-2xl'>CONTACT</li>
+          <li className='hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[8px] px-[15px] md:px-[20px] rounded-2xl' onClick={()=>navigate("/")}>HOME</li>
+          <li className='hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[8px] px-[15px] md:px-[20px] rounded-2xl' onClick={()=>navigate("/collection")}>COLLECTION</li>
+          <li className='hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[8px] px-[15px] md:px-[20px] rounded-2xl' onClick={()=>navigate("/about")}>ABOUT</li>
+          <li className='hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[8px] px-[15px] md:px-[20px] rounded-2xl' onClick={()=>navigate("/contact")}>CONTACT</li>
         </ul>
       </div>
 
@@ -85,7 +86,7 @@ function Nav() {
         <div className="w-full h-[70px] sm:h-[80px] bg-[#d8f6f9dd] absolute top-[100%] left-0 flex items-center justify-center px-[10px]">
           <input
             type="text"
-            className="w-[90%] sm:w-[70%] md:w-[50%] h-[50%] sm:h-[60%] bg-[#233533] rounded-[30px] px-[20px] sm:px-[40px] md:px-[50px] placeholder:text-white text-white text-[14px] sm:text-[16px] md:text-[18px]"
+            className=" lg:w-[50%] w-[80%] sm:w-[70%] md:w-[50%] h-[50%] sm:h-[60%] bg-[#233533] rounded-[30px] px-[20px] sm:px-[40px] md:px-[50px] placeholder:text-white text-white text-[14px] sm:text-[16px] md:text-[18px]"
             placeholder="Search Here"
           />
         </div>
@@ -109,11 +110,21 @@ function Nav() {
       )}
 
       {/* Bottom Nav (Mobile) */}
-      <div className='w-[100vw] h-[70px] sm:h-[80px] flex items-center justify-around px-[10px] text-[10px] sm:text-[12px] fixed bottom-0 left-0 bg-[#191818] md:hidden '>
-        <MdHome className='w-[22px] sm:w-[25px] h-[22px] sm:h-[25px] text-white' />
-        <IoCartSharp className='w-[22px] sm:w-[25px] h-[22px] sm:h-[25px] text-white' />
-        <BsFillCollectionFill className='w-[22px] sm:w-[25px] h-[22px] sm:h-[25px] text-white' />
-        <RiContactsFill className='w-[22px] sm:w-[25px] h-[22px] sm:h-[25px] text-white' />
+      
+      <div className='w-[100vw] h-[90px] flex items-center justify-between px-[20px]  text-[12px] fixed bottom-0 left-0 bg-[#191818] md:hidden'>
+        <button className='text-white flex items-center justify-center flex-col gap-[2px] ' onClick={()=>navigate("/")}>
+          <MdHome className='w-[28px] h-[28px] text-[white] md:hidden'/>Home
+        </button>
+        <button className='text-white flex items-center justify-center flex-col gap-[2px] '  onClick={()=>navigate("/collection")}>
+          <BsFillCollectionFill className='w-[28px] h-[28px] text-[white] md:hidden'/>Collection
+        </button>
+        <button className='text-white flex items-center justify-center flex-col gap-[2px] ' onClick={()=>navigate("contact")}>
+          <RiContactsFill className='w-[28px] h-[28px] text-[white] md:hidden'/>Contact
+        </button>
+        <button className='text-white flex items-center justify-center flex-col gap-[2px] ' onClick={()=>navigate("/")}>
+          <IoCartSharp className='w-[28px] h-[28px] text-[white] md:hidden'/>Cart
+        </button>
+          <p className='absolute w- [18px] h-[18px] flex items-center justify-center bg-white px-[5px] py-[2px] text-black font-semibold rounded-full text-[9px] top-[8px] right-[18px]'>10</p>
       </div>
     </div>
   )

@@ -10,6 +10,7 @@ import { UserDataContext } from './Context/UserContext'
 import About from './pages/About'
 import Collection from './pages/Collection'
 import Product from './pages/Product'
+import Contact from "./pages/Contact"
 
 
 function App() {
@@ -22,26 +23,82 @@ function App() {
       {/* <Nav /> */}
 
       <Routes>
-
-
-        {/* If a user tries to open /dashboard without logging in → they get redirected to /login with
-location.state = { from: "/dashboard" }.
-
-After they log in, since userData now exists → <Navigate> sends them back to /dashboard.
-
-If no previous page is saved, they go to /.  */}
+        {/* Login Route */}
         <Route
           path="/login"
-          element={userData ? (<Navigate to={location.state?.from || "/"} />) : (<Login />)} />
+          element={
+            userData ? (
+              <Navigate to={location.state?.from || "/"} />
+            ) : (
+              <Login />
+            )
+          }
+        />
 
+        {/* Signup Route */}
+        <Route
+          path="/signup"
+          element={
+            userData ? (
+              <Navigate to={location.state?.from || "/"} />
+            ) : (
+              <Registration />
+            )
+          }
+        />
 
+        {/* Protected Home Route */}
+        <Route
+          path="/"
+          element={
+            userData ? (
+              <Home />
+            ) : (
+              <Navigate to="/login" state={{ from: location.pathname }} />
+            )
+          }
+        />
 
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<Registration />} />
-        <Route path="/about" element={<About></About>} />
-        <Route path="/collection" element={<Collection></Collection>} />
-        <Route path="/product" element={<Product></Product>} />
+        {/* About Route */}
+        <Route
+          path="/about"
+          element={
+            userData ? (
+              <About />
+            ) : (
+              <Navigate to={location.state?.from || "/"} />
+
+            )
+          }
+        />
+
+        {/* Collection Route */}
+        <Route
+          path="/collection"
+          element={
+            userData ? (
+              <Collection />
+            ) : (
+
+              <Navigate to={location.state?.from || "/"} />
+            )
+          }
+        />
+
+        {/* Contact Route */}
+        <Route
+          path="/contact"
+          element={
+            userData ? (
+              <Contact />
+            ) : (
+              <Navigate to="/login" state={{ from: location.pathname }} />
+            )
+          }
+        />
       </Routes>
+
+
     </>
 
   )

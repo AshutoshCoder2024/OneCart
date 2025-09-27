@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import Background from '../components/Background'
 import Hero from '../components/Hero'
+import Product from './Product'
 
 function Home() {
     let heroData = [
@@ -28,6 +29,11 @@ function Home() {
             <div className='w-[100vw] lg:h-[100vh] md:h-[50vh] sm:h-[30vh] bg-gradient-to-l from-[#141414] to-[#0c2025] '>
                 <Background heroCount={heroCount} />
                 <Hero heroCount={heroCount} setHeroCount={setHeroCount} heroData={heroData[heroCount]} />
+            </div>
+
+            {/* product  */}
+            <div>
+                <Product></Product>
             </div>
         </div>
     )
