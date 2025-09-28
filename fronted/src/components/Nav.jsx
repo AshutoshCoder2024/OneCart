@@ -7,6 +7,7 @@ import { RiContactsFill } from "react-icons/ri";
 import { BsFillCollectionFill } from "react-icons/bs";
 import { AuthDataContext } from "../Context/AuthContext";
 import axios from 'axios'
+import { ShopDataContext } from "../Context/ShopContext";
 import { FaUserCircle } from "react-icons/fa"
 import { UserDataContext } from '../Context/UserContext'
 
@@ -15,7 +16,7 @@ import { UserDataContext } from '../Context/UserContext'
 function Nav() {
   const { userData, getCurrentUser } = useContext(UserDataContext)
   let { serverUrl } = useContext(AuthDataContext)
-  let [showSearch, setShowSearch] = useState(false)
+  let { showSearch, setShowSearch, search, setSearch } = useContext(ShopDataContext)
   const [showprofile, setShowProfile] = useState(false)
   let navigate = useNavigate()
 
@@ -50,6 +51,7 @@ function Nav() {
       </div>
 
       {/* Right Side */}
+
       <div className='w-[40%] sm:w-[35%] md:w-[30%] flex items-center justify-end gap-[15px] sm:gap-[20px] relative'>
         {showSearch ? (
           <IoSearchCircleSharp 
@@ -87,7 +89,7 @@ function Nav() {
           <input
             type="text"
             className=" lg:w-[50%] w-[80%] sm:w-[70%] md:w-[50%] h-[50%] sm:h-[60%] bg-[#233533] rounded-[30px] px-[20px] sm:px-[40px] md:px-[50px] placeholder:text-white text-white text-[14px] sm:text-[16px] md:text-[18px]"
-            placeholder="Search Here"
+            placeholder="Search Here" onChange={(e)=>{setSearch(e.target.value)}} value={search}
           />
         </div>
       )}

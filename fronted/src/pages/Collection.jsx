@@ -6,6 +6,7 @@ import Title from "../components/Title";
 import { ShopDataContext } from "../Context/ShopContext";
 import Card from "../components/Card";
 
+
 function Collection() {
   const [showfilter, setshowfilter] = useState(false);
   let { products } = useContext(ShopDataContext);
@@ -13,7 +14,10 @@ function Collection() {
   let [category, setCategory] = useState([]);
   let [subCategory, setSubCategory] = useState([]);
   let [sortType, setSortType] = useState("relavent");
+  let {search,showSearch} =useContext(ShopDataContext)
 
+
+  // filter function for category  
   const toogleCategory = (e) => {
     if (category.includes(e.target.value)) {
       setCategory((prev) => prev.filter((item) => item !== e.target.value));
@@ -21,6 +25,7 @@ function Collection() {
       setCategory((prev) => [...prev, e.target.value]);
     }
   };
+    // filter function for sub-category  
   const toogleSubCategory = (e) => {
     if (subCategory.includes(e.target.value)) {
       setSubCategory((prev) => prev.filter((item) => item !== e.target.value));
@@ -32,9 +37,12 @@ function Collection() {
   const applyFilter = () => {
     let productCopy = products.slice();
 
-    console.log("Selected categories:", category);
-    console.log("Selected subcategories:", subCategory);
-    console.log("Sample product subcategory:", products[0]?.subCategory);
+    if (showSearch && search && search.trim() !== "") {
+      const loweredSearch = search.toLowerCase();
+      productCopy = productCopy.filter((item) =>
+        (item.name || "").toLowerCase().includes(loweredSearch)
+      );
+    }
 
     if (category.length > 0) {
       productCopy = productCopy.filter((item) =>
@@ -72,8 +80,10 @@ function Collection() {
   //   automaticaly call when category, subcategory, or sortType changes
   useEffect(() => {
     applyFilter();
-  }, [category, subCategory, sortType]);
+  }, [category, subCategory, sortType,search,showSearch]);
 
+
+  // removed duplicate broken search block
   return (
     <div className="w-[100vw] min-h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] flex items-start flex-col md:flex-row justify-start pt--[70px] overflow-x-hidden z-[2]   ">
       {/* left */}
@@ -81,7 +91,7 @@ function Collection() {
         className={`md:w-[30vw] lg:w-[20vw] w-[100vw] md:min-h-[100vh] 
          ${showfilter ? "h-[45vh]" : "h-[8vh]"} 
               p-[20px] border-r-[1px] border-gray-400 text-[#aaf5fa] lg:fixed mt-[70px]`}
-      >
+      > 
         {/* filter word with > ^ */}
         <p
           className="text-[25px] font-semibold flex gap-[5px] items-center justify-start  cursor-pointer "
