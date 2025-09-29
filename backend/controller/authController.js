@@ -106,7 +106,21 @@ export const login = async (req, res) => {
 //Logout 
 export const logout = async (req, res) => {
     try {
-        res.clearCookie("token");
+        // Ensure cookie is cleared with the same attributes used when setting it
+        res.clearCookie("token", {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+            path: "/"
+        });
+        // Also set an expired cookie as a fallback for some browsers
+        res.cookie("token", "", {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+            path: "/",
+            expires: new Date(0)
+        });
         return res.status(200).json({ message: "Logout sucessfully " })
     } catch (error) {
         console.log("logout error:", error);
