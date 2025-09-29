@@ -42,8 +42,8 @@ export const registration = async (req, res) => {
         // Send the JWT token in cookies
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false, // change to true in production with HTTPS
-            sameSite: "strict",
+            secure: true, // change to true in production with HTTPS
+            sameSite: "none",
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
         });
 
@@ -87,8 +87,8 @@ export const login = async (req, res) => {
         // Send the JWT token in cookies
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false, // change to true in production with HTTPS
-            sameSite: "strict",
+            secure: true, // change to true in production with HTTPS
+            sameSite: "none",
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
         });
 
@@ -129,8 +129,8 @@ export const googlelogin = async (req, res) => {
         // Send the JWT token in cookies
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false, // change to true in production with HTTPS
-            sameSite: "strict",
+            secure: true, // change to true in production with HTTPS
+            sameSite: "none",
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
         });
         return res.status(200).json(user);
@@ -164,8 +164,8 @@ export const adminLogin = async (req, res) => {
             // Send the JWT token in cookies
             res.cookie("token", token, {
                 httpOnly: true,
-                secure: false, // change to true in production with HTTPS
-                sameSite: "strict",
+                secure: true, // change to true in production with HTTPS
+                sameSite: "none",
                 maxAge: 1 * 24 * 60 * 60 * 1000 // 1 day
             });
 
