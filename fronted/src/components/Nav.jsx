@@ -32,7 +32,7 @@ function Nav() {
   }
 
   return (
-    <div className='w-[100vw] h-[70px] bg-[#ecfafaec] z-10 relative flex items-center justify-between px-[20px] md:px-[30px] shadow'>
+    <div className='w-[100vw] h-[70px] bg-[#ecfafaec] z-10 fixed top-0 flex  items-center justify-between px-[30px] shadow-md shadow-black '>
       
       {/* Logo */}
       <div className='w-[30%] sm:w-[25%] lg:w-[20%] flex items-center justify-start gap-[10px] cursor-pointer'>
@@ -56,12 +56,12 @@ function Nav() {
         {showSearch ? (
           <IoSearchCircleSharp 
             className='w-[30px] sm:w-[34px] md:w-[38px] h-[30px] sm:h-[34px] md:h-[38px] text-black cursor-pointer'
-            onClick={() => setShowSearch(!showSearch)}
+            onClick={() => {setShowSearch(!showSearch); navigate('/collection')}}
           />
         ) : (
           <IoSearchCircleOutline 
             className='w-[30px] sm:w-[34px] md:w-[38px] h-[30px] sm:h-[34px] md:h-[38px] text-black cursor-pointer'
-            onClick={() => setShowSearch(!showSearch)}
+            onClick={() => {setShowSearch(!showSearch);navigate("/collection")}}
           />
         )}
 

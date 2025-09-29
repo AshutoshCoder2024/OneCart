@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react'
 import Background from '../components/Background'
 import Hero from '../components/Hero'
 import Product from './Product'
+import OurPolicy from '../components/ourpolocy'
+import NewLetterBox from '../components/NewLetterBox'
+import Footer from '../components/Footer'
 
 function Home() {
     let heroData = [
@@ -19,7 +22,6 @@ function Home() {
             setHeroCount((prevCount) => (prevCount + 1) % heroData.length);
         }, 3000);
         return () => clearInterval(interval);
-
     }, [])
 
     return (
@@ -34,6 +36,9 @@ function Home() {
             {/* product  */}
             <div>
                 <Product></Product>
+                <OurPolicy></OurPolicy>
+                <NewLetterBox></NewLetterBox>
+                <Footer></Footer>
             </div>
         </div>
     )

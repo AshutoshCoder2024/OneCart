@@ -9,7 +9,7 @@ const uploadOnCloudinary=async (filepath)=>{
     cloudinary.config({ 
         cloud_name: process.env.CLOUDINARY_NAME, 
         api_key: process.env.CLOUDINARY_API_KEY,
-        api_secret: process.env.CLOUDINARY_API_SECRET
+        api_secret: process.env.CLOUDIRY_API_SECRET
     });
     try {
         if(!filepath)
@@ -17,18 +17,15 @@ const uploadOnCloudinary=async (filepath)=>{
                 return null;
             }
         // Upload an image
-            const uploadResult=await cloudinary.uploader.upload
-            (filepath)
-            fs.unlinkSync(filepath)
+            const uploadResult=await cloudinary.uploader.upload(filepath)
+            try{ fs.unlinkSync(filepath) } catch(_) {}
             return uploadResult.secure_url
 
         
     } catch (error) {
-        fs.unlinkSync(filepath)
+        try{ if(filepath) fs.unlinkSync(filepath) } catch(_) {}
         console.log(error);
-        
     }
     
 }
-
 export default uploadOnCloudinary;

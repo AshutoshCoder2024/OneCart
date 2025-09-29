@@ -85,7 +85,7 @@ function Collection() {
 
   // removed duplicate broken search block
   return (
-    <div className="w-[100vw] min-h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] flex items-start flex-col md:flex-row justify-start pt--[70px] overflow-x-hidden z-[2]   ">
+    <div className='w-[99vw]  min-h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] flex items-start flex-col md:flex-row justify-start  pt-[70px] overflow-x-hidden z-[2] pb-[110px]'>
       {/* left */}
       <div
         className={`md:w-[30vw] lg:w-[20vw] w-[100vw] md:min-h-[100vh] 

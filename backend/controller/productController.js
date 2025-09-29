@@ -8,49 +8,75 @@ import Product from '../model/productModel.js';
 // add product 
 export const addProduct=async(req,res)=>{
     try{
-
         const {name,description,price, category,subCategory,sizes,bestseller}=req.body;
 
-        // Upload imagses to Cloudinary
-        let image1=await uploadOnCloudinary(req.files.image1[0].path);
-        let image2=await uploadOnCloudinary(req.files.image2[0].path);
-        let image3=await uploadOnCloudinary(req.files.image3[0].path);
-        let image4=await uploadOnCloudinary(req.files.image4[0].path);
+        // Basic required fields
+        if(!name || !description || !price || !category || !subCategory || !sizes){
+            return res.status(400).json({ message: 'Missing required fields' });
+        }
+
+        // Validate and parse price
+        const numericPrice = Number(price);
+        if(Number.isNaN(numericPrice) || numericPrice <= 0){
+            return res.status(400).json({ message: 'Invalid price' });
+        }
 
         // Parse sizes safely
-    let parsedSizes = [];
-    try {
-      parsedSizes = JSON.parse(sizes);
-    } catch {
-      return res.status(400).json({ message: 'Invalid sizes format. Expect JSON array string.' });
-    }
+        let parsedSizes = [];
+        try {
+            parsedSizes = typeof sizes === 'string' ? JSON.parse(sizes) : sizes;
+        } catch {
+            return res.status(400).json({ message: 'Invalid sizes format. Expect JSON array string.' });
+        }
+        if(!Array.isArray(parsedSizes) || parsedSizes.length === 0){
+            return res.status(400).json({ message: 'Sizes must be a non-empty array' });
+        }
 
+        // Guard against missing files from multer
+        const files = req.files || {};
+        const pathOrNull = (field)=> Array.isArray(files[field]) && files[field][0] && files[field][0].path ? files[field][0].path : null;
+
+        const image1Path = pathOrNull('image1');
+        const image2Path = pathOrNull('image2');
+        const image3Path = pathOrNull('image3');
+        const image4Path = pathOrNull('image4');
+
+        if(!image1Path || !image2Path || !image3Path || !image4Path){
+            return res.status(400).json({ message: 'All four images (image1..image4) are required' });
+        }
+
+        // Upload images to Cloudinary
+        const [image1,image2,image3,image4] = await Promise.all([
+            uploadOnCloudinary(image1Path),
+            uploadOnCloudinary(image2Path),
+            uploadOnCloudinary(image3Path),
+            uploadOnCloudinary(image4Path)
+        ]);
+
+        if(!image1 || !image2 || !image3 || !image4){
+            return res.status(500).json({ message: 'Image upload failed' });
+        }
 
         const productData={
             name,
             description,
-            price: Number(price),
+            price: numericPrice,
             category,
             subCategory,
-            sizes:parsedSizes,
-            // bestseller:bestseller==="true"? true:false,
-            bestseller: Boolean(bestseller),
+            sizes: parsedSizes,
+            bestseller: String(bestseller) === 'true' || bestseller === true,
             date: Date.now(),
-
             image1,
             image2,
             image3,
             image4
         }
 
-        // Create product document in the database
         const product = await Product.create(productData);
-
         return res.status(201).json(product)
-
     }catch(error){
         console.error("Error in addProduct:", error);
-        return res.status(500).json({ message: `Addproduct  Error ${error}` });
+        return res.status(500).json({ message: `AddProduct error: ${error.message || error}` });
     }
 }
 
@@ -68,8 +94,8 @@ export const listProduct =async (req,res)=>{
 }
 
 
-// Remove Product 
 
+// Remove Product 
 // export const removeProduct=async (req,res)=>{
 //     try {
 //         let {id}=req.params;
