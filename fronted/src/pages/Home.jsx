@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Background from '../components/Background'
 import Hero from '../components/Hero'
 import Product from './Product'
-import OurPolicy from '../components/ourpolocy'
+import OurPolicy from '../components/Ourpolocy'
 import NewLetterBox from '../components/NewLetterBox'
 import Footer from '../components/Footer'
 
