@@ -32,14 +32,13 @@ function Orders() {
               Under Development
             </h2>
           </div>
-          <p className="text-gray-200 mb-3">
-            Order management is being developed and will include:
-          </p>
-          <div className="text-gray-300 text-sm space-y-1">
+          <p className="text-gray-200 mb-2">I’m  working on this project. Some features are still in progress.</p>
+          {/* <p className="text-gray-200 mb-3">Orders management is in progress. Viewing, status updates, and tracking will be available soon.</p> */}
+          {/* <div className="text-gray-300 text-sm space-y-1">
             <p>• Order history & tracking</p>
             <p>• Status updates & details</p>
             <p>• Order management & cancellation</p>
-          </div>
+          </div> */}
         </div>
 
         {/* Back to Shopping */}

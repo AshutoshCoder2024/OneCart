@@ -32,14 +32,13 @@ function Cart() {
               Under Development
             </h2>
           </div>
-          <p className="text-gray-200 mb-3">
-            Cart functionality is being developed and will include:
-          </p>
-          <div className="text-gray-300 text-sm space-y-1">
+          <p className="text-gray-200 mb-2">I’m  working on this project. Some features are still in progress.</p>
+          {/* <p className="text-gray-200 mb-3">Cart functionality is in progress, including add/remove items and quantity updates.</p> */}
+          {/* <div className="text-gray-300 text-sm space-y-1">
             <p>• Add/remove products</p>
             <p>• Quantity management</p>
             <p>• Price calculations</p>
-          </div>
+          </div> */}
         </div>
 
         {/* Back to Shopping */}

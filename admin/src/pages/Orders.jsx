@@ -19,21 +19,22 @@ function Orders() {
         </div>
 
         {/* Under Development Card */}
+        <div className="mb-4 text-gray-300">
+          {/* I’m actively working on this project. Some features are still in progress. */}
+        </div>
         <div className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/30 rounded-xl p-6">
           <div className="flex items-center gap-2 mb-3">
             <FaCog className="text-yellow-400 animate-spin" />
-            <p className="text-yellow-400 font-medium">This module is under active development</p>
+            <p className="text-yellow-400 font-medium">under  development</p>
           </div>
-
-          <p className="text-gray-200 mb-3">
-            Admin order management will include:
-          </p>
-          <ul className="list-disc list-inside text-gray-300 space-y-1">
+          <p className="text-gray-200 mb-2">I am working on this project. Some features are still in progress.</p>
+          {/* <p className="text-gray-200 mb-3">Admin order management will include:</p> */}
+          {/* <ul className="list-disc list-inside text-gray-300 space-y-1">
             <li>Order list with filters (status/date/user)</li>
             <li>View order details and items</li>
             <li>Update order status (Pending, Shipped, Delivered, Cancelled)</li>
             <li>Export orders</li>
-          </ul>
+          </ul> */}
         </div>
       </div>
     </div>
