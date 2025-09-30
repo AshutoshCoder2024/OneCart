@@ -11,6 +11,11 @@ import About from './pages/About'
 import Collection from './pages/Collection'
 import Product from './pages/Product'
 import Contact from "./pages/Contact"
+import Cart from "./pages/Cart"
+import Orders from "./pages/Orders"
+import Ai from './components/Ai'
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify'
 
 
 function App() {
@@ -96,9 +101,34 @@ function App() {
             )
           }
         />
+
+        {/* Cart Route */}
+        <Route
+          path="/cart"
+          element={
+            userData ? (
+              <Cart />
+            ) : (
+              <Navigate to="/login" state={{ from: location.pathname }} />
+            )
+          }
+        />
+
+        {/* Orders Route */}
+        <Route
+          path="/order"
+          element={
+            userData ? (
+              <Orders />
+            ) : (
+              <Navigate to="/login" state={{ from: location.pathname }} />
+            )
+          }
+        />
       </Routes>
 
-
+      {userData && <Ai />}
+      <ToastContainer position="top-center" autoClose={2000} />
     </>
 
   )

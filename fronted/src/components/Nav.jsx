@@ -10,6 +10,9 @@ import axios from 'axios'
 import { ShopDataContext } from "../Context/ShopContext";
 import { FaUserCircle } from "react-icons/fa"
 import { UserDataContext } from '../Context/UserContext'
+// import Order from '../pages/Order'
+// import Cart from '../pages/Cart'
+import About from '../pages/About'
 
 
 
@@ -35,7 +38,7 @@ function Nav() {
     <div className='w-[100vw] h-[70px] bg-[#ecfafaec] z-10 fixed top-0 flex  items-center justify-between px-[30px] shadow-md shadow-black '>
       
       {/* Logo */}
-      <div className='w-[30%] sm:w-[25%] lg:w-[20%] flex items-center justify-start gap-[10px] cursor-pointer'>
+      <div className='w-[30%] sm:w-[25%] lg:w-[20%] flex items-center justify-start gap-[10px] cursor-pointer ' onClick={()=>navigate("/")}>
         <img src={logo} alt="logo" className='w-[30px]' />
         <h1 className='text-[20px] sm:text-[22px] md:text-[24px] font-semibold text-black'>OneCart</h1>
       </div>
@@ -75,7 +78,7 @@ function Nav() {
         )}
 
         {/* Cart */}
-        <div className="relative hidden md:block">
+        <div className="relative hidden md:block" onClick={()=>navigate("/cart")}>
           <IoCartSharp className='w-[32px] sm:w-[35px] md:w-[38px] h-[32px] sm:h-[35px] md:h-[38px] text-black cursor-pointer ' />
           <p className='absolute -top-1 -right-2 w-[16px] h-[16px] sm:w-[18px] sm:h-[18px] flex items-center justify-center bg-black text-white rounded-full text-[8px] sm:text-[9px]'>
             10
@@ -105,8 +108,8 @@ function Nav() {
               <li className='w-full hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer'
                 onClick={() => { navigate('/login'); setShowProfile(!showprofile) }}>Login</li>
             )}
-            <li className='w-full hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer'>Orders</li>
-            <li className='w-full hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer'>About</li>
+            <li className='w-full hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer' onClick={()=>{setShowProfile(!showprofile);navigate("/order") }}>Orders</li>
+            <li className='w-full hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer' onClick={()=>{setShowProfile(!showprofile);navigate("/about") }}>About</li>
           </ul>
         </div>
       )}
@@ -123,7 +126,7 @@ function Nav() {
         <button className='text-white flex items-center justify-center flex-col gap-[2px] ' onClick={()=>navigate("contact")}>
           <RiContactsFill className='w-[28px] h-[28px] text-[white] md:hidden'/>Contact
         </button>
-        <button className='text-white flex items-center justify-center flex-col gap-[2px] ' onClick={()=>navigate("/")}>
+        <button className='text-white flex items-center justify-center flex-col gap-[2px] ' onClick={()=>navigate("/cart")}>
           <IoCartSharp className='w-[28px] h-[28px] text-[white] md:hidden'/>Cart
         </button>
           <p className='absolute w- [18px] h-[18px] flex items-center justify-center bg-white px-[5px] py-[2px] text-black font-semibold rounded-full text-[9px] top-[8px] right-[18px]'>10</p>

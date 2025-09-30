@@ -5,6 +5,8 @@ export const AuthDataContext = createContext();
 
 function AuthContext({ children }) {
     const serverUrl = "https://onecart-backend-3m2d.onrender.com"
+    // const serverUrl = "http://localhost:8000"
+
     const value = { serverUrl }
 
     return (
