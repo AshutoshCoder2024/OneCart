@@ -17,6 +17,10 @@ function Login() {
     let {adminData, getAdmin} = useContext(adminDataContext)
     let navigate = useNavigate()
 
+    // Demo credentials for interviewers
+    const DEMO_EMAIL = "admin@gmail.com"
+    const DEMO_PASSWORD = "admin@1234"
+
 
     const AdminLogin = async () => {
         try {
@@ -62,7 +66,7 @@ function Login() {
             </div>
 
             {/* form  */}
-            <div className='max-w-[600px] w-[90%] h-[500px] bg-[#0000025] border-[1px] border-[#96969635] backdrop:blur-2xl rounded-lg shadow-lg flex items-center justify-center'>
+            <div className='max-w-[600px] w-[90%] h-[540px] bg-[#0000025] border-[1px] border-[#96969635] backdrop:blur-2xl rounded-lg shadow-lg flex items-center justify-center'>
 
                 <form action="" onSubmit={(e) => { e.preventDefault(); AdminLogin() }} className='w-[90%] h-[90%] flex flex-col items-center justify-start  gap-[20px]'>
 
@@ -71,13 +75,24 @@ function Login() {
 
 
 
-                    <div className='w-[90%] h-[400px] flex flex-col items-center justify-center gap-[15px] relative'>
-                        <input type='email' className='w-[100%] h-[50px] border-[2px] border-[#96969635] backdrop:blur-sm rounded-lg shawod-lg bg-transparent placeholder-[#ffffffc7] px-[20px] font-semibold' placeholder='Email required' onChange={(e) => setEmail(e.target.value)}></input>
-                        <input type={show ? 'text' : "password"} className='w-[100%] h-[50px] border-[2px] border-[#96969635] backdrop:blur-sm rounded-lg shawod-lg bg-transparent placeholder-[#ffffffc7] px-[20px] font-semibold' placeholder='Password required' onChange={(e) => setPassword(e.target.value)}></input>
+                    <div className='w-[90%] h-[440px] flex flex-col items-center justify-center gap-[15px] relative'>
+                        {/* Demo credentials box */}
+                        <div className='w-[100%] border border-[#96969635] rounded-lg p-3 text-sm text-[#e6e6e6] bg-[#0f172a66]'>
+                            <div className='flex items-center justify-between'>
+                                <span className='font-semibold'>Demo credentials</span>
+                                <button type='button' onClick={() => { setEmail(DEMO_EMAIL); setPassword(DEMO_PASSWORD); }} className='px-3 py-1 rounded-md bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs'>Use demo</button>
+                            </div>
+                            <div className='mt-2'>
+                                <p>Email: <span className='font-mono'>{DEMO_EMAIL}</span></p>
+                                <p>Password: <span className='font-mono'>{DEMO_PASSWORD}</span></p>
+                            </div>
+                        </div>
+                        <input type='email' className='w-[100%] h-[50px] border-[2px] border-[#96969635] backdrop:blur-sm rounded-lg shawod-lg bg-transparent placeholder-[#ffffffc7] px-[20px] font-semibold' placeholder='Email required' value={email} onChange={(e) => setEmail(e.target.value)}></input>
+                        <input type={show ? 'text' : "password"} className='w-[100%] h-[50px] border-[2px] border-[#96969635] backdrop:blur-sm rounded-lg shawod-lg bg-transparent placeholder-[#ffffffc7] px-[20px] font-semibold' placeholder='Password required' value={password} onChange={(e) => setPassword(e.target.value)}></input>
 
-                        {!show && <FaRegEyeSlash className='w-[20px] h-[20px] cursor-pointer absolute right-[5%] bottom-50' onClick={() => setshow(!show)} />
+                        {!show && <FaRegEyeSlash className='w-[20px] h-[20px] cursor-pointer absolute right-[5%] bottom-40' onClick={() => setshow(!show)} />
                         }
-                        {show && <FaRegEye className='w-[20px] h-[20px] cursor-pointer absolute right-[5%] bottom-50' onClick={() => setshow(!show)} />
+                        {show && <FaRegEye className='w-[20px] h-[20px] cursor-pointer absolute right-[5%] bottom-40' onClick={() => setshow(!show)} />
                         }
 
 
