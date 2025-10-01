@@ -24,8 +24,7 @@ function App() {
 
   return (
     <>
-      {userData && <Nav />}
-      {/* <Nav /> */}
+      <Nav />
 
       <Routes>
         {/* Login Route */}
@@ -52,79 +51,23 @@ function App() {
           }
         />
 
-        {/* Protected Home Route */}
-        <Route
-          path="/"
-          element={
-            userData ? (
-              <Home />
-            ) : (
-              <Navigate to="/login" state={{ from: location.pathname }} />
-            )
-          }
-        />
+        {/* Public Home Route */}
+        <Route path="/" element={<Home />} />
 
-        {/* About Route */}
-        <Route
-          path="/about"
-          element={
-            userData ? (
-              <About />
-            ) : (
-              <Navigate to={location.state?.from || "/"} />
+        {/* About Route (public) */}
+        <Route path="/about" element={<About />} />
 
-            )
-          }
-        />
+        {/* Collection Route (public) */}
+        <Route path="/collection" element={<Collection />} />
 
-        {/* Collection Route */}
-        <Route
-          path="/collection"
-          element={
-            userData ? (
-              <Collection />
-            ) : (
+        {/* Contact Route (public) */}
+        <Route path="/contact" element={<Contact />} />
 
-              <Navigate to={location.state?.from || "/"} />
-            )
-          }
-        />
+        {/* Cart Route (public) */}
+        <Route path="/cart" element={<Cart />} />
 
-        {/* Contact Route */}
-        <Route
-          path="/contact"
-          element={
-            userData ? (
-              <Contact />
-            ) : (
-              <Navigate to="/login" state={{ from: location.pathname }} />
-            )
-          }
-        />
-
-        {/* Cart Route */}
-        <Route
-          path="/cart"
-          element={
-            userData ? (
-              <Cart />
-            ) : (
-              <Navigate to="/login" state={{ from: location.pathname }} />
-            )
-          }
-        />
-
-        {/* Orders Route */}
-        <Route
-          path="/order"
-          element={
-            userData ? (
-              <Orders />
-            ) : (
-              <Navigate to="/login" state={{ from: location.pathname }} />
-            )
-          }
-        />
+        {/* Orders Route (public) */}
+        <Route path="/order" element={<Orders />} />
       </Routes>
 
       {userData && <Ai />}
