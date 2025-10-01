@@ -23,6 +23,11 @@ function About() {
           <p className='lg:w-[80%] w-[100%] text-[white] md:text-[16px] text-[13px]'>
             Our mission is to redefine online shopping by delivering quality, affordability, and convenience. OneCart connects customers with trusted products and brands, offering a seamless, customer-focused experience that saves time, adds value, and fits every lifestyle and need.
           </p>
+          <div className='lg:w-[80%] w-[100%] text-[white] md:text-[16px] text-[13px] bg-white/5 border border-white/10 rounded-md p-3'>
+            <p className='font-semibold text-[#bff1f9] mb-1'>Contact</p>
+            <p>Ranchi, Jharkhand</p>
+            <p>9341013395</p>
+          </div>
         </div>
       </div>
       <div className='w-[100%] flex items-center justify-center flex-col gap-[10px]'>

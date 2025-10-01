@@ -33,10 +33,10 @@ function Footer() {
                         <p className='text-[19px] md:text-[20px] text-[#1e2223] font-sans '>GET IN TOUCH</p>
 
                     </div>
-                     <ul>
-                         <li className='text-[15px] text-[#1e2223] '>+91-9876543210</li>
+                    <ul>
+                         <li className='text-[15px] text-[#1e2223] '>9341013395</li>
+                        <li className='text-[15px] text-[#1e2223] '>Ranchi, Jharkhand</li>
                         <li className='text-[15px] text-[#1e2223] '>contact@onecart.com</li>
-                        <li className='text-[15px] text-[#1e2223] hidden md:block'>+1-123-456-7890</li>
                         <li className='text-[15px] text-[#1e2223] hidden md:block'>admin@onecart.com</li>
                     </ul>
                 </div>
