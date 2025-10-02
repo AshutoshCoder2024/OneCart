@@ -70,8 +70,8 @@ function App() {
         <Route path="/order" element={<Orders />} />
       </Routes>
 
-      {userData && <Ai />}
-      <ToastContainer position="top-center" autoClose={2000} />
+      {/* {userData && <Ai />}
+      <ToastContainer position="top-center" autoClose={2000} /> */}
     </>
 
   )
